@@ -26,5 +26,4 @@ public class VisitorConstant implements IVisitor<Boolean> {
 		return false;
 	}
 	
-
 }
