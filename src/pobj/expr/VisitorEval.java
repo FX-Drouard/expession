@@ -5,20 +5,20 @@ public class VisitorEval implements IVisitor<Integer>{
 	@Override
 	public Integer visit(Constant c) {
 		// TODO Auto-generated method stub
-		return c.eval();
+		return c.getValue();
 	}
 
 	@Override
 	public Integer visit(Add e) {
 		// TODO Auto-generated method stub
-		Integer res= (Integer)(e.eval());
+		Integer res= (Integer)(e.getLeft().accept(this)+e.getRight().accept(this));
 		return res;
 	}
 
 	@Override
 	public Integer visit(Mult e) {
 		// TODO Auto-generated method stub
-		Integer res= (Integer)(e.eval());
+		Integer res= (Integer)(e.getLeft().accept(this)*e.getRight().accept(this));
 		return res;
 	}
 
