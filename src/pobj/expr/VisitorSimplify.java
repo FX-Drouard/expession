@@ -13,18 +13,33 @@ public class VisitorSimplify implements IVisitor<Expression> {
 		// TODO Auto-generated method stub
 		if(Question10.isConstant(e)) {
 			return new Constant(Question10.evalConstantExpression(e));
-		}else if(e.getLeft().eval()==0) {
-			return e.getRight();
-		}else if (e.getRight().eval()==0) {
-			return e.getLeft();
+		}else {
+			if(Question10.isConstant(e.getLeft())) {
+				if(Question10.evalConstantExpression(e.getLeft())==0) return e.getRight();
+			}
+			if(Question10.isConstant(e.getRight())) {
+				if(Question10.evalConstantExpression(e.getRight())==0) return e.getLeft();
+			}
+			return new Add(e.getLeft().accept(this),e.getRight().accept(this));
 		}
-		return null;
 	}
 
 	@Override
 	public Expression visit(Mult e) {
 		// TODO Auto-generated method stub
-		return null;
+		if(Question10.isConstant(e)) {
+			return new Constant(Question10.evalConstantExpression(e));
+		}else {
+			if(Question10.isConstant(e.getLeft())) {
+				if(Question10.evalConstantExpression(e.getLeft())==0) return new Constant(0);
+				if(Question10.evalConstantExpression(e.getLeft())==1) return e.getRight();
+			}
+			if(Question10.isConstant(e.getRight())) {
+				if(Question10.evalConstantExpression(e.getRight())==0) return new Constant(0);
+				if(Question10.evalConstantExpression(e.getRight())==1) return e.getLeft();
+			}
+			return new Mult(e.getLeft().accept(this),e.getRight().accept(this));
+		}
 	}
 
 	@Override

@@ -11,13 +11,13 @@ public class VisitorConstant implements IVisitor<Boolean> {
 	@Override
 	public Boolean visit(Add e) {
 		// TODO Auto-generated method stub
-		return true;
+		return e.getLeft().accept(this) && e.getRight().accept(this);
 	}
 
 	@Override
 	public Boolean visit(Mult e) {
 		// TODO Auto-generated method stub
-		return true;
+		return e.getLeft().accept(this) && e.getRight().accept(this);
 	}
 
 	@Override
